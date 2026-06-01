@@ -2,84 +2,235 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tambah User</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: sans-serif; background: #f5f5f0; color: #1a1a1a; padding: 2rem; }
-
-        .page { max-width: 480px; }
-
-        .back-link {
-            display: inline-flex; align-items: center; gap: 5px;
-            font-size: 13px; color: #888; text-decoration: none; margin-bottom: 1.5rem;
-        }
-        .back-link:hover { color: #1a1a1a; }
-
-        h1 { font-size: 22px; font-weight: 500; margin-bottom: 1.5rem; }
-
-        .card {
-            background: #fff;
-            border: 0.5px solid rgba(0,0,0,0.12);
-            border-radius: 12px;
-            padding: 1.5rem;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
         }
 
-        .field { margin-bottom: 1.25rem; }
-        label {
-            display: block; font-size: 13px; font-weight: 500;
-            color: #666; margin-bottom: 6px;
-        }
-        input[type="text"], input[type="email"] {
-            width: 100%; padding: 9px 12px;
-            border: 0.5px solid rgba(0,0,0,0.25);
-            border-radius: 8px; font-size: 14px;
-            outline: none; transition: border-color 0.15s, box-shadow 0.15s;
-        }
-        input:focus {
-            border-color: #534AB7;
-            box-shadow: 0 0 0 3px rgba(83,74,183,0.12);
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#534AB7,#7A70F8);
+            padding:20px;
         }
 
-        .actions { display: flex; align-items: center; gap: 10px; margin-top: 1.5rem; }
-
-        .btn-submit {
-            padding: 9px 20px; border-radius: 8px;
-            background: #534AB7; color: #EEEDFE;
-            font-size: 14px; font-weight: 500;
-            border: none; cursor: pointer;
+        .container{
+            width:100%;
+            max-width:500px;
         }
-        .btn-submit:hover { background: #3C3489; }
 
-        .btn-cancel {
-            padding: 9px 16px; border-radius: 8px;
-            background: transparent; color: #666;
-            font-size: 14px; border: 0.5px solid rgba(0,0,0,0.2);
-            cursor: pointer; text-decoration: none;
+        .back-link{
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
+            color:white;
+            text-decoration:none;
+            margin-bottom:20px;
+            font-size:14px;
+            transition:.3s;
         }
-        .btn-cancel:hover { background: #f5f5f0; }
+
+        .back-link:hover{
+            transform:translateX(-3px);
+        }
+
+        .card{
+            background:rgba(255,255,255,0.95);
+            backdrop-filter:blur(10px);
+            border-radius:24px;
+            padding:35px;
+            box-shadow:0 20px 40px rgba(0,0,0,.15);
+        }
+
+        .header{
+            text-align:center;
+            margin-bottom:30px;
+        }
+
+        .header-icon{
+            width:70px;
+            height:70px;
+            background:linear-gradient(135deg,#534AB7,#7A70F8);
+            border-radius:50%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin:auto;
+            margin-bottom:15px;
+            color:white;
+            font-size:32px;
+        }
+
+        .header h1{
+            font-size:28px;
+            color:#222;
+            margin-bottom:8px;
+        }
+
+        .header p{
+            color:#777;
+            font-size:14px;
+        }
+
+        .field{
+            margin-bottom:20px;
+        }
+
+        .field label{
+            display:block;
+            margin-bottom:8px;
+            color:#555;
+            font-weight:600;
+            font-size:14px;
+        }
+
+        .input-group{
+            position:relative;
+        }
+
+        .input-group i{
+            position:absolute;
+            left:15px;
+            top:50%;
+            transform:translateY(-50%);
+            color:#777;
+            font-size:18px;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:14px 14px 14px 45px;
+            border:2px solid #e6e6e6;
+            border-radius:12px;
+            font-size:14px;
+            transition:.3s;
+            outline:none;
+        }
+
+        .input-group input:focus{
+            border-color:#534AB7;
+            box-shadow:0 0 0 4px rgba(83,74,183,.15);
+        }
+
+        .actions{
+            display:flex;
+            gap:12px;
+            margin-top:30px;
+        }
+
+        .btn-submit{
+            flex:1;
+            border:none;
+            cursor:pointer;
+            padding:14px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#534AB7,#7A70F8);
+            color:white;
+            font-weight:600;
+            font-size:15px;
+            transition:.3s;
+            box-shadow:0 8px 20px rgba(83,74,183,.25);
+        }
+
+        .btn-submit:hover{
+            transform:translateY(-2px);
+            box-shadow:0 12px 25px rgba(83,74,183,.35);
+        }
+
+        .btn-cancel{
+            flex:1;
+            text-decoration:none;
+            text-align:center;
+            padding:14px;
+            border-radius:12px;
+            border:2px solid #ddd;
+            color:#666;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .btn-cancel:hover{
+            background:#f5f5f5;
+        }
+
+        @media(max-width:500px){
+            .card{
+                padding:25px;
+            }
+
+            .actions{
+                flex-direction:column;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="page">
-    <a href="/" class="back-link">← Kembali</a>
-    <h1>Tambah User</h1>
+<div class="container">
+
+    <a href="/" class="back-link">
+        <i class="ti ti-arrow-left"></i>
+        Kembali ke Daftar User
+    </a>
 
     <div class="card">
+
+        <div class="header">
+            <div class="header-icon">
+                <i class="ti ti-user-plus"></i>
+            </div>
+
+            <h1>Tambah User</h1>
+            <p>Masukkan informasi pengguna baru</p>
+        </div>
+
         <form action="/simpan" method="post" th:object="${user}">
+
             <div class="field">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama" th:field="*{nama}" placeholder="Masukkan nama lengkap">
+                <label>Nama Lengkap</label>
+                <div class="input-group">
+                    <i class="ti ti-user"></i>
+                    <input
+                        type="text"
+                        th:field="*{nama}"
+                        placeholder="Masukkan nama lengkap">
+                </div>
             </div>
+
             <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" th:field="*{email}" placeholder="contoh@email.com">
+                <label>Email</label>
+                <div class="input-group">
+                    <i class="ti ti-mail"></i>
+                    <input
+                        type="email"
+                        th:field="*{email}"
+                        placeholder="contoh@email.com">
+                </div>
             </div>
+
             <div class="actions">
-                <button type="submit" class="btn-submit">Simpan</button>
-                <a href="/" class="btn-cancel">Batal</a>
+                <button type="submit" class="btn-submit">
+                    <i class="ti ti-device-floppy"></i>
+                    Simpan Data
+                </button>
+
+                <a href="/" class="btn-cancel">
+                    Batal
+                </a>
             </div>
+
         </form>
+
     </div>
+
 </div>
 
 </body>

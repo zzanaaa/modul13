@@ -3,68 +3,206 @@
 <head>
     <title>Data User</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: sans-serif; background: #f5f5f0; color: #1a1a1a; padding: 2rem; }
-
-        .header {
-            display: flex; align-items: center;
-            justify-content: space-between; margin-bottom: 1.5rem;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI', sans-serif;
         }
-        h1 { font-size: 22px; font-weight: 500; }
 
-        .add-btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 16px; border-radius: 8px;
-            background: #534AB7; color: #EEEDFE;
-            font-size: 14px; font-weight: 500; text-decoration: none;
+        body{
+            background:linear-gradient(135deg,#f4f6fb,#eef1ff);
+            min-height:100vh;
+            padding:40px;
         }
-        .add-btn:hover { background: #3C3489; }
 
-        .table-wrap {
-            background: #fff; border: 0.5px solid rgba(0,0,0,0.15);
-            border-radius: 12px; overflow: hidden;
+        .container{
+            max-width:1100px;
+            margin:auto;
         }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
 
-        thead tr { background: #EEEDFE; }
-        thead th {
-            padding: 12px 16px; text-align: left;
-            font-size: 12px; font-weight: 500;
-            letter-spacing: 0.04em; text-transform: uppercase;
-            color: #3C3489; border-bottom: 0.5px solid #AFA9EC;
+        .header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:25px;
         }
-        tbody tr { border-bottom: 0.5px solid rgba(0,0,0,0.08); }
-        tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background: #f9f9f7; }
-        tbody td { padding: 12px 16px; vertical-align: middle; }
-        tbody td:first-child { font-size: 12px; color: #888; font-weight: 500; }
+
+        .title{
+            font-size:32px;
+            font-weight:700;
+            color:#2d2d2d;
+        }
+
+        .subtitle{
+            color:#777;
+            margin-top:5px;
+        }
+
+        .add-btn{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:12px 20px;
+            border-radius:12px;
+            text-decoration:none;
+            background:linear-gradient(135deg,#534AB7,#7167E8);
+            color:white;
+            font-weight:600;
+            transition:0.3s;
+            box-shadow:0 8px 20px rgba(83,74,183,.25);
+        }
+
+        .add-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 12px 25px rgba(83,74,183,.35);
+        }
+
+        .card{
+            background:white;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .card-header{
+            background:linear-gradient(135deg,#534AB7,#7167E8);
+            color:white;
+            padding:20px 25px;
+        }
+
+        .card-header h2{
+            font-size:20px;
+            font-weight:600;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        thead{
+            background:#f6f7ff;
+        }
+
+        thead th{
+            padding:18px;
+            text-align:left;
+            font-size:13px;
+            text-transform:uppercase;
+            color:#534AB7;
+            letter-spacing:1px;
+        }
+
+        tbody td{
+            padding:18px;
+            border-top:1px solid #eee;
+            color:#444;
+        }
+
+        tbody tr{
+            transition:.2s;
+        }
+
+        tbody tr:hover{
+            background:#fafbff;
+        }
+
+        .id-badge{
+            background:#EEEDFE;
+            color:#534AB7;
+            padding:6px 12px;
+            border-radius:20px;
+            font-weight:600;
+            font-size:13px;
+        }
+
+        .email{
+            color:#666;
+        }
+
+        .user-icon{
+            color:#534AB7;
+            margin-right:8px;
+        }
+
+        .empty{
+            text-align:center;
+            padding:30px;
+            color:#999;
+        }
+
+        @media(max-width:768px){
+            .header{
+                flex-direction:column;
+                gap:15px;
+                align-items:flex-start;
+            }
+
+            table{
+                display:block;
+                overflow-x:auto;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>Data User</h1>
-    <a href="/tambah" class="add-btn">+ Tambah User</a>
-</div>
+<div class="container">
 
-<div class="table-wrap">
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="u : ${users}">
-                <td th:text="${u.id}"></td>
-                <td th:text="${u.nama}"></td>
-                <td th:text="${u.email}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="header">
+        <div>
+            <h1 class="title">👥 Data User</h1>
+            <p class="subtitle">Kelola data pengguna sistem</p>
+        </div>
+
+        <a href="/tambah" class="add-btn">
+            <i class="ti ti-plus"></i>
+            Tambah User
+        </a>
+    </div>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h2>Daftar Pengguna</h2>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="u : ${users}">
+                    <td>
+                        <span class="id-badge" th:text="${u.id}"></span>
+                    </td>
+
+                    <td>
+                        <i class="ti ti-user user-icon"></i>
+                        <span th:text="${u.nama}"></span>
+                    </td>
+
+                    <td class="email" th:text="${u.email}"></td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(users)}">
+                    <td colspan="3" class="empty">
+                        Belum ada data user.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
 
 </body>
